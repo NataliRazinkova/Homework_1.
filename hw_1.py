@@ -84,13 +84,8 @@ class AddressBook(UserDict):
 
     @staticmethod
     def find_next_weekday(d, weekday):
-        """
-        Функція для знаходження наступного заданого дня тижня після заданої дати.
-        d: datetime.date - початкова дата.
-        weekday: int - день тижня від 0 (понеділок) до 6 (неділя).
-        """
         days_ahead = weekday - d.weekday()
-        if days_ahead <= 0:  # Якщо день народження вже минув у цьому тижні.
+        if days_ahead <= 0:  
             days_ahead += 7
         return d + timedelta(days_ahead)
 
@@ -107,10 +102,10 @@ class AddressBook(UserDict):
                 birthday_this_year = birthday_this_year.replace(year=today.year + 1)
 
             if 0 <= (birthday_this_year - today).days <= days:
-                if birthday_this_year.weekday() >= 5:  # субота або неділя
+                if birthday_this_year.weekday() >= 5: 
                     birthday_this_year = self.find_next_weekday(
                         birthday_this_year, 0
-                    )  # Понеділок
+                    )  
 
                 congratulation_date_str = birthday_this_year.strftime("%Y.%m.%d")
                 upcoming_birthdays.append(
@@ -130,7 +125,7 @@ def input_error(func):
         except KeyError:
             return "Name not found. Please, check and try again."
         except ValueError as e:
-            return e  # "Incorrect value. Please check and try again."
+            return e  
         except IndexError:
             return "Enter correct information."
 
